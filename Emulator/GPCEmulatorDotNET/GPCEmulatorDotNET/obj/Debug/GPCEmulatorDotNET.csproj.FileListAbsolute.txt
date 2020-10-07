@@ -1,0 +1,13 @@
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\bin\Debug\GPCEmulatorDotNET.exe.config
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\bin\Debug\GPCEmulatorDotNET.exe
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\bin\Debug\GPCEmulatorDotNET.pdb
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\bin\Debug\GPCEmulator.dll
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\bin\Debug\GPCEmulator.pdb
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\obj\Debug\GPCEmulatorDotNET.csprojAssemblyReference.cache
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\obj\Debug\GPCEmulatorDotNET.Properties.Resources.resources
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\obj\Debug\GPCEmulatorDotNET.csproj.GenerateResource.cache
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\obj\Debug\GPCEmulatorDotNET.csproj.CoreCompileInputs.cache
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\obj\Debug\GPCEmulatorDotNET.csproj.CopyComplete
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\obj\Debug\GPCEmulatorDotNET.exe
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\obj\Debug\GPCEmulatorDotNET.pdb
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulatorDotNET\obj\Debug\GPCEmulatorDotNET.Form1.resources

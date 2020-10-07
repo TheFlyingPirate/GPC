@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPCEmulatorDotNET", "GPCEmulatorDotNET\GPCEmulatorDotNET.csproj", "{45068062-40F2-49C0-930B-E4C8CB5054C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPCEmulator", "GPCEmulator\GPCEmulator.csproj", "{2303FC9B-9666-499C-B4FF-BC0F6CD3A286}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45068062-40F2-49C0-930B-E4C8CB5054C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45068062-40F2-49C0-930B-E4C8CB5054C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45068062-40F2-49C0-930B-E4C8CB5054C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45068062-40F2-49C0-930B-E4C8CB5054C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2303FC9B-9666-499C-B4FF-BC0F6CD3A286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2303FC9B-9666-499C-B4FF-BC0F6CD3A286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2303FC9B-9666-499C-B4FF-BC0F6CD3A286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2303FC9B-9666-499C-B4FF-BC0F6CD3A286}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

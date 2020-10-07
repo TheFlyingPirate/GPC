@@ -1,0 +1,6 @@
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulator\obj\Debug\GPCEmulator.csprojAssemblyReference.cache
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulator\obj\Debug\GPCEmulator.csproj.CoreCompileInputs.cache
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulator\bin\Debug\GPCEmulator.dll
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulator\bin\Debug\GPCEmulator.pdb
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulator\obj\Debug\GPCEmulator.dll
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulator\obj\Debug\GPCEmulator.pdb
