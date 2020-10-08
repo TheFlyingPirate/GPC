@@ -1,0 +1,9 @@
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCASM\bin\Debug\GPCASM.exe
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCASM\bin\Debug\GPCASM.pdb
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCASM\bin\Debug\GPCEmulator.dll
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCASM\bin\Debug\GPCEmulator.pdb
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCASM\obj\Debug\GPCASM.csprojAssemblyReference.cache
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCASM\obj\Debug\GPCASM.csproj.CoreCompileInputs.cache
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCASM\obj\Debug\GPCASM.csproj.CopyComplete
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCASM\obj\Debug\GPCASM.exe
+E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCASM\obj\Debug\GPCASM.pdb
