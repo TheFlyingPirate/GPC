@@ -37,7 +37,12 @@
             this.timer1 = new System.Timers.Timer();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.lblPointer = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadMemoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveMemoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize) (this.timer1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStart
@@ -63,21 +68,21 @@
             // lb1
             // 
             this.lb1.FormattingEnabled = true;
-            this.lb1.Location = new System.Drawing.Point(12, 12);
+            this.lb1.Location = new System.Drawing.Point(12, 25);
             this.lb1.Name = "lb1";
-            this.lb1.Size = new System.Drawing.Size(291, 433);
+            this.lb1.Size = new System.Drawing.Size(291, 420);
             this.lb1.TabIndex = 2;
             // 
             // txtWrite
             // 
-            this.txtWrite.Location = new System.Drawing.Point(309, 12);
+            this.txtWrite.Location = new System.Drawing.Point(309, 27);
             this.txtWrite.Name = "txtWrite";
             this.txtWrite.Size = new System.Drawing.Size(100, 20);
             this.txtWrite.TabIndex = 3;
             // 
             // btnWrite
             // 
-            this.btnWrite.Location = new System.Drawing.Point(415, 10);
+            this.btnWrite.Location = new System.Drawing.Point(415, 25);
             this.btnWrite.Name = "btnWrite";
             this.btnWrite.Size = new System.Drawing.Size(75, 23);
             this.btnWrite.TabIndex = 4;
@@ -103,11 +108,40 @@
             // 
             // lblPointer
             // 
-            this.lblPointer.Location = new System.Drawing.Point(496, 10);
+            this.lblPointer.Location = new System.Drawing.Point(496, 25);
             this.lblPointer.Name = "lblPointer";
             this.lblPointer.Size = new System.Drawing.Size(100, 23);
             this.lblPointer.TabIndex = 6;
             this.lblPointer.Text = "Pointer: 00000000";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 7;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.loadMemoryToolStripMenuItem, this.saveMemoryToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // loadMemoryToolStripMenuItem
+            // 
+            this.loadMemoryToolStripMenuItem.Name = "loadMemoryToolStripMenuItem";
+            this.loadMemoryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadMemoryToolStripMenuItem.Text = "Load Memory";
+            this.loadMemoryToolStripMenuItem.Click += new System.EventHandler(this.loadMemoryToolStripMenuItem_Click);
+            // 
+            // saveMemoryToolStripMenuItem
+            // 
+            this.saveMemoryToolStripMenuItem.Name = "saveMemoryToolStripMenuItem";
+            this.saveMemoryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveMemoryToolStripMenuItem.Text = "Save Memory";
             // 
             // Form1
             // 
@@ -121,13 +155,22 @@
             this.Controls.Add(this.lb1);
             this.Controls.Add(this.btnTick);
             this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize) (this.timer1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadMemoryToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem saveMemoryToolStripMenuItem;
 
         private System.Windows.Forms.Label lblPointer;
 

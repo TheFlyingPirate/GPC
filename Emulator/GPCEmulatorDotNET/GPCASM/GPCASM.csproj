@@ -4,11 +4,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{2303FC9B-9666-499C-B4FF-BC0F6CD3A286}</ProjectGuid>
-        <OutputType>Library</OutputType>
+        <ProjectGuid>{BF10E16B-3912-4B1C-9611-BA7BBF838B35}</ProjectGuid>
+        <OutputType>Exe</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>GPCEmulator</RootNamespace>
-        <AssemblyName>GPCEmulator</AssemblyName>
+        <RootNamespace>GPCASM</RootNamespace>
+        <AssemblyName>GPCASM</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -38,13 +38,14 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Bus.cs" />
-        <Compile Include="BUSDevices\BusDevice.cs" />
-        <Compile Include="BUSDevices\MainComponents\CPU.cs" />
-        <Compile Include="BUSDevices\MainComponents\InstructionSet.cs" />
-        <Compile Include="BUSDevices\MainComponents\Memory.cs" />
-        <Compile Include="Device.cs" />
+        <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\GPCEmulator\GPCEmulator.csproj">
+        <Project>{2303fc9b-9666-499c-b4ff-bc0f6cd3a286}</Project>
+        <Name>GPCEmulator</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

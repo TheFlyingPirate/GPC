@@ -7,8 +7,8 @@ namespace GPCEmulator.BUSDevices.MainComponents
     public class CPU:BusDevice
     {
         private byte ARegister, BRegister, Accumulator, StepCounter, InstructionRegister = 0x0;
-        private UInt16 MemoryPointer, XRegister = 0x0;
-        private bool CarryFlag, ZeroFlag;
+        private UInt16 MemoryPointer, XRegister, StackPointer = 0x0;
+        private bool CarryFlag, ZeroFlag, EQFlag = false;
 
         public UInt16 getMemoryPointer()
         {
@@ -39,12 +39,12 @@ namespace GPCEmulator.BUSDevices.MainComponents
         {
             switch (InstructionRegister)
             {
-                case 0x00: //NOP
-                    StepCounter = 0;
+                case (byte)InstructionSet.NOP: //NOP
+                    resetCycle();
                     break;
                 
                 
-                case 0x01:  //LDA
+                case (byte)InstructionSet.LDA1:  //LDA
                     switch (StepCounter)
                     {
                         case 3:
@@ -70,17 +70,17 @@ namespace GPCEmulator.BUSDevices.MainComponents
                             break;
                         case 8:
                             ARegister = bus.readData();
-                            StepCounter = 0;
+                            resetCycle();
                             break;
                         default:
-                            StepCounter = 0;
+                            resetCycle();
                             throw new Exception("Invalid Step for OP Code: " + InstructionRegister.ToString("X"));
                             break;
                     }
                     break;
                 
                 
-                case 0x02:  //STA
+                case (byte)InstructionSet.STA:  //STA
                     switch (StepCounter)
                     {
                         case 3:
@@ -104,17 +104,17 @@ namespace GPCEmulator.BUSDevices.MainComponents
                             bus.setWriteFlag(true);
                             bus.writeAddress(XRegister);
                             bus.writeData(ARegister);
-                            StepCounter = 0;
+                            resetCycle();
                             break;
                         default:
-                            StepCounter = 0;
+                            resetCycle();
                             throw new Exception("Invalid Step for OP Code: " + InstructionRegister.ToString("X"));
                             break;
                     }
                     break;
 
                 
-                case 0x03:  //LDB
+                case (byte)InstructionSet.LDB1:  //LDB
                     switch (StepCounter)
                     {
                         case 3:
@@ -140,17 +140,17 @@ namespace GPCEmulator.BUSDevices.MainComponents
                             break;
                         case 8:
                             BRegister = bus.readData();
-                            StepCounter = 0;
+                            resetCycle();
                             break;
                         default:
-                            StepCounter = 0;
+                            resetCycle();
                             throw new Exception("Invalid Step for OP Code: " + InstructionRegister.ToString("X"));
                             break;
                     }
                     break;
                 
                 
-                case 0x04:  //STB
+                case (byte)InstructionSet.STB:  //STB
                     switch (StepCounter)
                     {
                         case 3:
@@ -174,23 +174,23 @@ namespace GPCEmulator.BUSDevices.MainComponents
                             bus.setWriteFlag(true);
                             bus.writeAddress(XRegister);
                             bus.writeData(BRegister);
-                            StepCounter = 0;
+                            resetCycle();
                             break;
                         default:
-                            StepCounter = 0;
+                            resetCycle();
                             throw new Exception("Invalid Step for OP Code: " + InstructionRegister.ToString("X"));
                             break;
                     }
                     break;
                 
                 
-                case 0x05: //ADD
+                case (byte)InstructionSet.ADD1: //ADD
                     ARegister = Accumulator;
-                    StepCounter = 0;
+                    resetCycle();
                     break;
                     
                     
-                case 0x06:  //STB
+                case (byte)InstructionSet.ADD2:  //ADD
                     switch (StepCounter)
                     {
                         case 3:
@@ -214,14 +214,115 @@ namespace GPCEmulator.BUSDevices.MainComponents
                             bus.setWriteFlag(true);
                             bus.writeAddress(XRegister);
                             bus.writeData(Accumulator);
-                            StepCounter = 0;
+                            resetCycle();
                             break;
                         default:
-                            StepCounter = 0;
+                            resetCycle();
                             throw new Exception("Invalid Step for OP Code: " + InstructionRegister.ToString("X"));
                             break;
                     }
                     break;
+                
+                
+                case (byte)InstructionSet.MOV: //MOV
+                    switch (StepCounter)
+                    {
+                        case 3:
+                            bus.setWriteFlag(true);
+                            bus.writeAddress(0xFFFF);
+                            bus.writeData(ARegister);
+                            break;
+                        case 4:
+                            MemoryPointer++;
+                            bus.setWriteFlag(false);
+                            bus.writeAddress(MemoryPointer);
+                            break;
+                        case 5:
+                            XRegister = bus.readData();
+                            XRegister = (UInt16)(XRegister << 8);
+                            break;
+                        case 6:
+                            MemoryPointer++;
+                            bus.setWriteFlag(false);
+                            bus.writeAddress(MemoryPointer);
+                            break;
+                        case 7:
+                            XRegister += bus.readData();
+                            break;
+                        case 8:
+                            ARegister = bus.readData();
+                            break;
+                        case 9:
+                            MemoryPointer++;
+                            bus.setWriteFlag(false);
+                            bus.writeAddress(MemoryPointer);
+                            break;
+                        case 10:
+                            XRegister = bus.readData();
+                            XRegister = (UInt16)(XRegister << 8);
+                            break;
+                        case 11:
+                            MemoryPointer++;
+                            bus.setWriteFlag(false);
+                            bus.writeAddress(MemoryPointer);
+                            break;
+                        case 12:
+                            XRegister += bus.readData();
+                            break;
+                        case 13:
+                            bus.setWriteFlag(true);
+                            bus.writeAddress(XRegister);
+                            bus.writeData(ARegister);
+                            break;
+                        case 14:
+                            bus.setWriteFlag(false);
+                            bus.writeAddress(0xFFFF);
+                            break;
+                        case 15:
+                            ARegister = bus.readData();
+                            resetCycle();
+                            break;
+                        default:
+                            resetCycle();
+                            throw new Exception("Invalid Step for OP Code: " + InstructionRegister.ToString("X"));
+                            break;
+                    }
+                    
+                    break;
+                    case (byte)InstructionSet.JMP: //JMP
+                        switch (StepCounter)
+                        {
+                            case 3:
+                                MemoryPointer++;
+                                bus.setWriteFlag(false);
+                                bus.writeAddress(MemoryPointer);
+                                break;
+                            case 4:
+                                XRegister = bus.readData();
+                                XRegister = (UInt16)(XRegister << 8);
+                                break;
+                            case 5:
+                                MemoryPointer++;
+                                bus.setWriteFlag(false);
+                                bus.writeAddress(MemoryPointer);
+                                break;
+                            case 6:
+                                XRegister += bus.readData();
+                                break;
+                            case 7:
+                                bus.setWriteFlag(false);
+                                MemoryPointer = XRegister;
+                                StepCounter = 0;
+                                break;
+
+
+                            default:
+                                resetCycle();
+                                throw new Exception("Invalid Step for OP Code: " + InstructionRegister.ToString("X"));
+                                break;
+                                MemoryPointer++;
+                        }
+                        break;
                 
                 
                 default:
@@ -230,7 +331,12 @@ namespace GPCEmulator.BUSDevices.MainComponents
                     break;
             }
         }
-        
+
+        void resetCycle()
+        {
+            StepCounter = 0;
+            MemoryPointer++;
+        }
         
         
          public new void Tick()
@@ -260,10 +366,9 @@ namespace GPCEmulator.BUSDevices.MainComponents
                 Execute();
             }
 
-            if (StepCounter == 0)
-            {
-                MemoryPointer++;
-            }
+            
+              
+            
         }
     }
 }

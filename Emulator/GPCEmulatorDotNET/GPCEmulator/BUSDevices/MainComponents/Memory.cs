@@ -7,6 +7,8 @@ namespace GPCEmulator.BUSDevices.MainComponents
     public class Memory : BusDevice
     {
         public List<byte> Mem;
+        
+        public UInt16 lastChanged = 0;
         public Memory(ushort l, ushort u, Bus b) : base(l, u, b)
         {
             lower = l;
@@ -19,7 +21,11 @@ namespace GPCEmulator.BUSDevices.MainComponents
           
             }
         }
-
+        public void OnMemoryChanged(UInt16 i)
+        {
+            lastChanged = i;
+        
+        }
         public new void Tick()
         {
             if (bus.readAddress() >= lower && bus.readAddress() <= upper)
@@ -27,10 +33,13 @@ namespace GPCEmulator.BUSDevices.MainComponents
                 if (bus.getWriteFlag() == true)
                 {
                     Mem[bus.readAddress()] = bus.readData();
+                    OnMemoryChanged(bus.readAddress());
                 }
                 else
                 {
                     bus.writeData(Mem[bus.readAddress()]);
+                   
+                   
                 }
             }
         }
