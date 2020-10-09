@@ -8,18 +8,18 @@ using GPCEmulator.BUSDevices.MainComponents;
 
 namespace GPCASM
 {
+ 
+    
     internal class Program
     {
         
-        public static int FileCount = 0;
+      
         public static Dictionary<String,byte> Signatures = new Dictionary<String, byte>();
         public static Dictionary<String,UInt16> JmpAddress = new Dictionary<string, ushort>();
         public static void Main(string[] args)
         {
-            
             Console.WriteLine("---GPCASM---");
-            
-            
+            int FileCount = 0;
             string input = ".\\main.asm";
             string output = ".\\main.bin";
             string signatureFile = ".\\config.\\sig.txt";
@@ -32,16 +32,14 @@ namespace GPCASM
                 input = args[0];
                 output = args[0].Replace(".asm", ".bin");
             }
-
             foreach (string s in  File.ReadLines(signatureFile).ToArray())
             {
                 Signatures.Add(s.Split(',')[0], Convert.ToByte(s.Split(',')[1], 16));
             }
-         
             try
             {
                 Console.WriteLine("Reading File: " + input);
-                string[] source = PreParse(File.ReadLines(input).ToList()).ToArray();
+                string[] source = PreParse(File.ReadLines(input).ToList(),ref FileCount).ToArray();
                 try
                 {
                     Console.WriteLine("Resolving Labels");
@@ -61,16 +59,12 @@ namespace GPCASM
                             Console.WriteLine(e);
                             throw;
                         }
-                       
-                     
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
                         throw;
                     }
-                    
-                    
                 }
                 catch (Exception e)
                 {
@@ -83,17 +77,14 @@ namespace GPCASM
             {
                 Console.WriteLine(e);
                 throw;
-     
             }
-            
             Console.WriteLine("Press any Key to Exit");
             Console.ReadKey();
-
-
         }
-        public static List<String> PreParse(List<String> sourceCode)
+        
+        public static List<String> PreParse(List<String> sourceCode, ref int FileCounter)
         {
-            FileCount++;
+            
             List<String> output=new List<string>();
             foreach (string s in sourceCode)
             {
@@ -104,7 +95,7 @@ namespace GPCASM
                     Console.WriteLine("Reading File: " + s1);
                     if (File.Exists(s1))
                     {
-                        List<string> ns = PreParse(File.ReadLines(s1).ToList());
+                        List<string> ns = PreParse(File.ReadLines(s1).ToList(),ref FileCounter);
                         foreach (string s2 in ns)
                         {
                             output.Add(s2);
@@ -137,7 +128,8 @@ namespace GPCASM
                 else if (sourceCode[i].StartsWith("//"))
                 {
                     
-                }else if (sourceCode[i].StartsWith("'"))
+                }
+                else if (sourceCode[i].StartsWith("'"))
                 {
                     if (sourceCode[i].EndsWith("'"))
                     {
@@ -148,8 +140,8 @@ namespace GPCASM
                         throw new Exception("Invalid String at Line: " + i.ToString());
                     }
                 
-                }else
-
+                }
+                else
                 {
                     sourceCode[i] = sourceCode[i].Replace("\t", "");
                     string[] curLine = sourceCode[i].Split(' ');
@@ -178,19 +170,18 @@ namespace GPCASM
                     }
                 }
             }
-        
         }
 
         public static byte[] Assemble(String[] sourceCode)
         {
             List<byte> target=new List<byte>();
             
-               for (int i = 0; i < sourceCode.Length; i++)
+            for (int i = 0; i < sourceCode.Length; i++)
             {
        
                 if (sourceCode[i].StartsWith(".") )
                 {
-                
+                    
                 }
                 else if (sourceCode[i].StartsWith("//"))
                 {
@@ -201,8 +192,8 @@ namespace GPCASM
                     {
                         target.Add(Convert.ToByte(sourceCode[i][i2]));
                     }
-                }else
-
+                }
+                else
                 {
                     foreach(KeyValuePair<string, UInt16> entry in JmpAddress)
                     {
@@ -242,7 +233,6 @@ namespace GPCASM
                                 sig += ".A";
                             }
                         }
-
                         if (Signatures.ContainsKey(sig))
                         {
                             target.Add(Signatures[sig]);
@@ -271,87 +261,12 @@ namespace GPCASM
                         {
                             throw new Exception("OP Code Signature <"+ sig +"> at line: " + i.ToString() + " is not a valid Signature");
                         }
-                        
                     }
-/*
-                    switch (curLine[0])
-                    {
-                        case "NOP":
-                            target.Add((byte)InstructionSet.NOP);
-                            break;
-                        case "LDA":
-                            target.Add((byte)InstructionSet.LDA1);
-                            val = relitiveParser(curLine[1]);
-                            target.Add((byte)(val >> 8));
-                            
-                            target.Add((byte)val);
-                            break;
-                        case "STA":
-                            target.Add((byte)InstructionSet.STA);
-                            val = relitiveParser(curLine[1]);
-                            target.Add((byte)(val >> 8));
-                            target.Add((byte)val);
-                            break;
-                        case "LDB":
-                            target.Add((byte)InstructionSet.LDB1);
-                            val = relitiveParser(curLine[1]);
-                            target.Add((byte)(val >> 8));
-                            target.Add((byte)val);
-                            break;
-                        case "STB":
-                            target.Add((byte)InstructionSet.STB);
-                            val = relitiveParser(curLine[1]);
-                            target.Add((byte)(val >> 8));
-                            target.Add((byte)val);
-                            break;
-                        case "ADD":
-                            if (curLine.Length == 1)
-                            {
-                                target.Add((byte)InstructionSet.ADD1);
-                            }else if (curLine.Length == 2)
-                            {
-                                target.Add((byte)InstructionSet.ADD2);
-                                val = relitiveParser(curLine[1]);
-                                target.Add((byte)(val >> 8));
-                                target.Add((byte)val);
-                            }
-                            break;
-                        case "MOV":
-                            target.Add((byte)InstructionSet.MOV);
-                            val = relitiveParser(curLine[1]);
-                            target.Add((byte)(val >> 8));
-                            target.Add((byte)val);
-                            val = relitiveParser(curLine[2]);
-                            target.Add((byte)(val >> 8));
-                            target.Add((byte)val);
-                            break;
-                        case "JMP":
-                            target.Add((byte)InstructionSet.JMP);
-                            val = relitiveParser(curLine[1]);
-                            target.Add((byte)(val >> 8));
-                            target.Add((byte)val);
-                            break;
-                        case "DAT":
-                           
-                            break;
-                        
-                        default:
-                            throw new Exception("INVALID COMMAND: " + curLine[0]);
-                            break;
-                        
-                    }*/
-                    
                 }
-                
-                
             }
-            
-            
-            
-
             return target.ToArray();
         }
-
+        
         public static UInt64 relitiveParser(String input)
         {
             UInt64 output = 0;
@@ -377,6 +292,7 @@ namespace GPCASM
             }
             return output;
         }
+
         public static UInt64 convertFromString(String input)
         {
             UInt64 output = 0;
@@ -398,14 +314,7 @@ namespace GPCASM
             {
                 output = Convert.ToUInt64(input);
             }
-            
-            
-            
             return output;
-        } 
-        
-        
-        
-        
+        }
     }
 }

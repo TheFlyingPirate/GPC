@@ -26,8 +26,6 @@
     <list default="true" id="d744f8da-03b2-4898-bec4-1b4a217f0097" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GPCEmulatorDotNET/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GPCEmulatorDotNET/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GPCASM/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GPCASM/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GPCASM/obj/Debug/GPCASM.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/GPCASM/obj/Debug/GPCASM.csprojAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GPCEmulatorDotNET/obj/Debug/GPCEmulatorDotNET.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/GPCEmulatorDotNET/obj/Debug/GPCEmulatorDotNET.csprojAssemblyReference.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +120,7 @@
       <workItem from="1602082435425" duration="3230000" />
       <workItem from="1602098407758" duration="5266000" />
       <workItem from="1602169568926" duration="21505000" />
-      <workItem from="1602258661339" duration="834000" />
+      <workItem from="1602258661339" duration="7320000" />
     </task>
     <servers />
   </component>
