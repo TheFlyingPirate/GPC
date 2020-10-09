@@ -12,8 +12,8 @@ namespace GPCASM
     {
         
         public static int FileCount = 0;
-        public static Dictionary<String,byte> signatures = new Dictionary<String, byte>();
-        public static Dictionary<String,UInt16> jmpAddress = new Dictionary<string, ushort>();
+        public static Dictionary<String,byte> Signatures = new Dictionary<String, byte>();
+        public static Dictionary<String,UInt16> JmpAddress = new Dictionary<string, ushort>();
         public static void Main(string[] args)
         {
             
@@ -35,21 +35,21 @@ namespace GPCASM
 
             foreach (string s in  File.ReadLines(signatureFile).ToArray())
             {
-                signatures.Add(s.Split(',')[0], Convert.ToByte(s.Split(',')[1], 16));
+                Signatures.Add(s.Split(',')[0], Convert.ToByte(s.Split(',')[1], 16));
             }
          
             try
             {
                 Console.WriteLine("Reading File: " + input);
-                string[] source = preParse(File.ReadLines(input).ToList()).ToArray();
+                string[] source = PreParse(File.ReadLines(input).ToList()).ToArray();
                 try
                 {
                     Console.WriteLine("Resolving Labels");
-                    getAddressesForLines(source);
+                    GetAddressesForLines(source);
                     try
                     {
                         Console.WriteLine("Assembling Files");
-                        byte[] target = assemble(source);
+                        byte[] target = Assemble(source);
                         try
                         {
                             Console.WriteLine("Writing to binary to: " + output);
@@ -91,7 +91,7 @@ namespace GPCASM
 
 
         }
-        public static List<String> preParse(List<String> sourceCode)
+        public static List<String> PreParse(List<String> sourceCode)
         {
             FileCount++;
             List<String> output=new List<string>();
@@ -104,15 +104,14 @@ namespace GPCASM
                     Console.WriteLine("Reading File: " + s1);
                     if (File.Exists(s1))
                     {
-                        List<string> ns = preParse(File.ReadLines(s1).ToList());
+                        List<string> ns = PreParse(File.ReadLines(s1).ToList());
                         foreach (string s2 in ns)
                         {
                             output.Add(s2);
 
                         }
                     }else{
-
-                    throw new Exception("File: " + s1 + " not found");
+                        throw new Exception("File: " + s1 + " not found");
                     }
                 }
                 else
@@ -124,7 +123,7 @@ namespace GPCASM
         }
 
 
-        public static void getAddressesForLines(string[] sourceCode)
+        public static void GetAddressesForLines(string[] sourceCode)
         {
             List<UInt16> addresses = new List<ushort>();
             UInt16 curAddress = 0x0000;
@@ -133,7 +132,7 @@ namespace GPCASM
                 addresses.Add(curAddress);
                 if (sourceCode[i].StartsWith(".") )
                 {
-                    jmpAddress.Add(sourceCode[i], curAddress);
+                    JmpAddress.Add(sourceCode[i], curAddress);
                 }
                 else if (sourceCode[i].StartsWith("//"))
                 {
@@ -157,7 +156,7 @@ namespace GPCASM
                  
                     if (curLine[0] == "DAT")
                     {
-                        for (int i2 = 0; i2 < Int32.Parse(curLine[1]) / 8; i2++)
+                        for (int parameterIndex = 0; parameterIndex < Int32.Parse(curLine[1]) / 8; parameterIndex++)
                         {
                             curAddress ++;
                         }
@@ -165,9 +164,9 @@ namespace GPCASM
                     else
                     {
                         curAddress++; 
-                        for (int i3 = 1; i3 < curLine.Length; i3++)
+                        for (int parameterIndex = 1; parameterIndex < curLine.Length; parameterIndex++)
                         {
-                            if (curLine[i3].StartsWith("#"))
+                            if (curLine[parameterIndex].StartsWith("#"))
                             {
                                 curAddress++;
                             }
@@ -182,7 +181,7 @@ namespace GPCASM
         
         }
 
-        public static byte[] assemble(String[] sourceCode)
+        public static byte[] Assemble(String[] sourceCode)
         {
             List<byte> target=new List<byte>();
             
@@ -205,7 +204,7 @@ namespace GPCASM
                 }else
 
                 {
-                    foreach(KeyValuePair<string, UInt16> entry in jmpAddress)
+                    foreach(KeyValuePair<string, UInt16> entry in JmpAddress)
                     {
                         sourceCode[i] = sourceCode[i].Replace(entry.Key, entry.Value.ToString());
                     }
@@ -218,23 +217,23 @@ namespace GPCASM
                         UInt64 value;
                         value = relitiveParser(curLine[2]);
                         int st = Int32.Parse((curLine[1]))/8;
-                        List<byte> inv=new List<byte>();
-                        for (int i2 = 0; i2 < st; i2++)
+                        List<byte> inverseList=new List<byte>();
+                        for (int parameterIndex = 0; parameterIndex < st; parameterIndex++)
                         {
-                            inv.Add((byte)value);
+                            inverseList.Add((byte)value);
                             value = value >> 8;
                         }
 
-                        for (int i2 = inv.Count - 1; i2 >= 0; i2--)
+                        for (int parameterIndex = inverseList.Count - 1; parameterIndex >= 0; parameterIndex--)
                         {
-                            target.Add(inv[i2]);
+                            target.Add(inverseList[parameterIndex]);
                         }
                     }
                     else
                     {
-                        for (int i3 = 1; i3 < curLine.Length; i3++)
+                        for (int parameterIndex = 1; parameterIndex < curLine.Length; parameterIndex++)
                         {
-                            if (curLine[i3].StartsWith("#"))
+                            if (curLine[parameterIndex].StartsWith("#"))
                             {
                                 sig += ".D";
                             }
@@ -244,19 +243,19 @@ namespace GPCASM
                             }
                         }
 
-                        if (signatures.ContainsKey(sig))
+                        if (Signatures.ContainsKey(sig))
                         {
-                            target.Add(signatures[sig]);
+                            target.Add(Signatures[sig]);
                             string[] parms = sig.Split('.');
-                            for (int i3 = 1; i3 < parms.Length; i3++)
+                            for (int parameterIndex = 1; parameterIndex < parms.Length; parameterIndex++)
                             {
-                                if (parms[i3] == "D")
+                                if (parms[parameterIndex] == "D")
                                 {
-                                    val = relitiveParser(curLine[i3]);
+                                    val = relitiveParser(curLine[parameterIndex]);
                                     target.Add((byte)val);
-                                }else if (parms[i3] == "A")
+                                }else if (parms[parameterIndex] == "A")
                                 {
-                                    val = relitiveParser(curLine[i3]);
+                                    val = relitiveParser(curLine[parameterIndex]);
                                     target.Add((byte)(val >> 8));
                             
                                     target.Add((byte)val);
