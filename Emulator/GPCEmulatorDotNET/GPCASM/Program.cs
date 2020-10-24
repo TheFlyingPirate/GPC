@@ -22,7 +22,7 @@ namespace GPCASM
             int FileCount = 0;
             string input = ".\\main.asm";
             string output = ".\\main.bin";
-            string signatureFile = ".\\config.\\sig.txt";
+            string signatureFile = ".\\config\\sig.txt";
             if (args.Length == 2)
             {
                 input = args[0];

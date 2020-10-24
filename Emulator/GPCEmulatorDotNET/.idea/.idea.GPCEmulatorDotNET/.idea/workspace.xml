@@ -24,8 +24,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d744f8da-03b2-4898-bec4-1b4a217f0097" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../Documantation/Documantation.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Documantation/Instruction Table.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../Documantation/Instruction Table.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GPCEmulatorDotNET/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GPCEmulatorDotNET/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GPCASM/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GPCASM/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GPCASM/bin/Debug/config/sig.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GPCASM/bin/Debug/config/sig.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GPCEmulator/BUSDevices/MainComponents/CPU.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GPCEmulator/BUSDevices/MainComponents/CPU.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GPCEmulator/BUSDevices/MainComponents/InstructionSet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GPCEmulator/BUSDevices/MainComponents/InstructionSet.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,9 +53,9 @@
         <option value="$PROJECT_DIR$/GPCEmulator/Device.cs" />
         <option value="$PROJECT_DIR$/GPCEmulator/BUSDevices/MainComponents/Memory.cs" />
         <option value="$PROJECT_DIR$/GPCEmulatorDotNET/Form1.cs" />
-        <option value="$PROJECT_DIR$/GPCEmulator/BUSDevices/MainComponents/CPU.cs" />
-        <option value="$PROJECT_DIR$/GPCEmulator/BUSDevices/MainComponents/InstructionSet.cs" />
         <option value="$PROJECT_DIR$/GPCASM/Program.cs" />
+        <option value="$PROJECT_DIR$/GPCEmulator/BUSDevices/MainComponents/InstructionSet.cs" />
+        <option value="$PROJECT_DIR$/GPCEmulator/BUSDevices/MainComponents/CPU.cs" />
       </list>
     </option>
   </component>
@@ -120,7 +125,10 @@
       <workItem from="1602082435425" duration="3230000" />
       <workItem from="1602098407758" duration="5266000" />
       <workItem from="1602169568926" duration="21505000" />
-      <workItem from="1602258661339" duration="7320000" />
+      <workItem from="1602258661339" duration="7919000" />
+      <workItem from="1602529799958" duration="1742000" />
+      <workItem from="1603460631310" duration="23000" />
+      <workItem from="1603547584301" duration="2973000" />
     </task>
     <servers />
   </component>
@@ -333,23 +341,6 @@
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/3200.0.1920.1040/1920.270.1280.760/0.0.1920.1040@0.0.1920.1040" timestamp="1602027328289" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/GPCEmulator/BUSDevices/MainComponents/CPU.cs</url>
-          <line>283</line>
-          <properties documentPath="E:\Development\GPC Emulator\Emulator\GPCEmulatorDotNET\GPCEmulator\BUSDevices\MainComponents\CPU.cs" initialLine="283">
-            <startOffsets>
-              <option value="11402" />
-            </startOffsets>
-            <endOffsets>
-              <option value="11408" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Frame#GPCASM.Program.assemble" memberName="curLine" />
