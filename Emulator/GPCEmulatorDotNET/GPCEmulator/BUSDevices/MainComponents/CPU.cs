@@ -8,7 +8,8 @@ namespace GPCEmulator.BUSDevices.MainComponents
     public class CPU:BusDevice
     {
         private byte ARegister, BRegister, Accumulator, ORRegister, ANDRegister,NOTRegister,XORRegister,SLRegister,SRRegister, StepCounter, InstructionRegister = 0x0;
-        private UInt16 MemoryPointer, XRegister, StackPointer = 0x0;
+        private UInt16 MemoryPointer, XRegister = 0x0;
+        private UInt16 StackPointer = 0xFFFF;
         private bool CarryFlag, ZeroFlag, EQFlag = false;
 
         public UInt16 getMemoryPointer()
@@ -775,22 +776,23 @@ namespace GPCEmulator.BUSDevices.MainComponents
                         case 7:
                            
                             bus.writeAddress(StackPointer);
-                            bus.setWriteFlag(true);
+                           
                             break;
                         case 8:
-                            bus.writeData((byte) (MemoryPointer>>8));
+                            bus.setWriteFlag(true);
+                            bus.writeData((byte) ((MemoryPointer & 0b1111111100000000)>>8));
                             StackPointer--;
                             break;
                         case 9:
+                            bus.setWriteFlag(false);
                             bus.writeAddress(StackPointer);
-                            bus.setWriteFlag(true);
                             break;
                         case 10:
-                            bus.writeData((byte) MemoryPointer);
+                            bus.setWriteFlag(true);
+                            bus.writeData((byte) (MemoryPointer & 0b0000000011111111));
                             StackPointer--;
                             MemoryPointer = XRegister;
                             StepCounter = 0;
-                            bus.setWriteFlag(false);
                             break;
                         default:
                             resetCycle();
@@ -805,6 +807,7 @@ namespace GPCEmulator.BUSDevices.MainComponents
                         case 3: case 5: 
                             StackPointer++;
                             bus.setWriteFlag(false);
+                            bus.writeAddress(StackPointer);
                             break;
                         case 4:
                             XRegister = bus.readData();

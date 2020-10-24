@@ -2,6 +2,9 @@
 	LDA #0x02
 	LDB #0x03
 	STB .data+2
+.main
+	JSR .mult
+	JMP .main
 .mult
 	STB .data
 	LDB #0xFF
@@ -12,7 +15,7 @@
 	LDA .data+1
 	LDB #0x00
 	JEQ .done
-	JMP .mult
+	RSR
 .done
 	LDA .data
 	STA .data+3
