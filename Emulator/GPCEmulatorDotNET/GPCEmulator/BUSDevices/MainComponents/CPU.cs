@@ -610,6 +610,8 @@ namespace GPCEmulator.BUSDevices.MainComponents
                         
                     }else
                     {
+                        MemoryPointer++;
+                        MemoryPointer++;
                         resetCycle();
                         break;
                     }
@@ -653,6 +655,8 @@ namespace GPCEmulator.BUSDevices.MainComponents
                         
                     }else
                     {
+                        MemoryPointer++;
+                        MemoryPointer++;
                         resetCycle();
                         break;
                     }
@@ -696,6 +700,8 @@ namespace GPCEmulator.BUSDevices.MainComponents
                         
                     }else
                     {
+                        MemoryPointer++;
+                        MemoryPointer++;
                         resetCycle();
                         break;
                     }
@@ -739,6 +745,8 @@ namespace GPCEmulator.BUSDevices.MainComponents
                         
                     }else
                     {
+                        MemoryPointer++;
+                        MemoryPointer++;
                         resetCycle();
                         break;
                     }
@@ -833,7 +841,7 @@ namespace GPCEmulator.BUSDevices.MainComponents
             if (ARegister + BRegister > 0xFF)
             {
                 
-                Accumulator = (byte)((int)ARegister + (int)BRegister - 0xFF);
+                Accumulator = (byte)((int)ARegister + (int)BRegister - 0x100);
             }
             else
             {
@@ -841,6 +849,9 @@ namespace GPCEmulator.BUSDevices.MainComponents
                 Accumulator = (byte)(ARegister + BRegister);
             }
 
+          
+            EQFlag = ARegister == BRegister;
+            ZeroFlag = ARegister == 0x00;
             ANDRegister = (byte)(ARegister & BRegister);
             NOTRegister = (byte)(ARegister^0b11111111);
             XORRegister = (byte)(ARegister ^ BRegister);

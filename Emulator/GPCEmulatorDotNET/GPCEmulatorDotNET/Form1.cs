@@ -64,6 +64,7 @@ namespace GPCEmulatorDotNET
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            timer1.Interval = Convert.ToDouble(textBox1.Text);
             timer1.Enabled = true;
         }
 
@@ -89,5 +90,7 @@ namespace GPCEmulatorDotNET
             }
             populateLB();
         }
+
+       
     }
 }

@@ -269,6 +269,7 @@ namespace GPCASM
         
         public static UInt64 relitiveParser(String input)
         {
+            input=input.Replace('#'.ToString(),"");
             UInt64 output = 0;
             if (input.Contains("+"))
             {
@@ -295,24 +296,25 @@ namespace GPCASM
 
         public static UInt64 convertFromString(String input)
         {
+    
             UInt64 output = 0;
             Int64 neg = 0;
             if (input.StartsWith("0x"))
             {
-                output = Convert.ToUInt64(input,16);
+                output = Convert.ToUInt64(input.Replace('#'.ToString(),""),16);
             }else if (input.StartsWith("0b"))
             {
-                output = Convert.ToUInt64(input.Replace("0b", ""),2);
+                output = Convert.ToUInt64(input.Replace("0b", "").Replace('#'.ToString(),""),2);
             }
             else if(input.StartsWith("-"))
             {
-                neg = Convert.ToInt64(input);
+                neg = Convert.ToInt64(input.Replace('#'.ToString(),""));
                 output = (UInt64) neg;
                 
             }
             else
             {
-                output = Convert.ToUInt64(input);
+                output = Convert.ToUInt64(input.Replace('#'.ToString(),""));
             }
             return output;
         }

@@ -41,6 +41,8 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadMemoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveMemoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize) (this.timer1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -133,21 +135,39 @@
             // loadMemoryToolStripMenuItem
             // 
             this.loadMemoryToolStripMenuItem.Name = "loadMemoryToolStripMenuItem";
-            this.loadMemoryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadMemoryToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.loadMemoryToolStripMenuItem.Text = "Load Memory";
             this.loadMemoryToolStripMenuItem.Click += new System.EventHandler(this.loadMemoryToolStripMenuItem_Click);
             // 
             // saveMemoryToolStripMenuItem
             // 
             this.saveMemoryToolStripMenuItem.Name = "saveMemoryToolStripMenuItem";
-            this.saveMemoryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveMemoryToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.saveMemoryToolStripMenuItem.Text = "Save Memory";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(684, 385);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(636, 385);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 23);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Interval";
+         
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblPointer);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnWrite);
@@ -166,6 +186,9 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox1;
 
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadMemoryToolStripMenuItem;
